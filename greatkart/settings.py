@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+from django.contrib.messages import constants as messages
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #     'django.middleware.csrf.CsrfViewMiddleware',
 ]
 
 ROOT_URLCONF = 'greatkart.urls'
@@ -66,7 +68,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'category.context_processor.menu_links', #added this to use this function in any templates we want
+                # added this to use this function in any templates we want
+                'category.context_processor.menu_links',
                 'carts.context_processors.counter',
             ],
         },
@@ -75,7 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'greatkart.wsgi.application'
 
-#adding in setting that we are using custom user model
+# adding in setting that we are using custom user model
 AUTH_USER_MODEL = 'accounts.Account'
 
 
@@ -127,12 +130,27 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR /'static' #this directory is to make the static file work in our project
-STATICFILES_DIRS =[
-     'greatkart/static',
+# this directory is to make the static file work in our project
+STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = [
+    'greatkart/static',
 ]
 
-#media file configurations
+# media file configurations
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR /'media'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+    # 50: 'critical',
+}
+
+# SMTP Configuration
+EMAIL_HOST = 'smtp.gmail.com'
+EMA_PORT = 587
+EMAIL_HOST_USER = 'sivivek38@gmail.com'
+EMAIL_HOST_PASSWORD = 'mwxlgnjnhgcrvokc' #this password is acquired by 2 app verification
+EMAIL_USE_TLS = True
+#EMAIL_BACKEND = 'django.core.mail.backend.smtp.EmailBackend'
