@@ -8,8 +8,11 @@ from django.db.models import Q
 from django.http import HttpResponse
 from .forms import ReviewForm
 from django.contrib import messages
+<<<<<<< HEAD
 from orders.models import OrderProduct
 
+=======
+>>>>>>> 1eca709f6d9c9b418bb2a7d3b6d6fb41bf2eeaf0
 
 
 # Create your views here.
@@ -82,7 +85,11 @@ def submit_review(request, product_id):
     url = request.META.get('HTTP_REFERER')
     if request.method == 'POST':
         try:
+<<<<<<< HEAD
             reviews = ReviewRating.objects.get(user__id=request.user.id, product__id=product_id)
+=======
+            reviews = ReviewRating.objects.get( user__id = request.user.id, product__id=product_id)
+>>>>>>> 1eca709f6d9c9b418bb2a7d3b6d6fb41bf2eeaf0
             form = ReviewForm(request.POST, instance=reviews)
             form.save()
             messages.success(request, 'Thank you ! your review has been updated.')
@@ -91,9 +98,15 @@ def submit_review(request, product_id):
             form = ReviewForm(request.POST)
             if form.is_valid():
                 data = ReviewRating()
+<<<<<<< HEAD
                 data.subject = form.cleaned_data['subject']
                 data.rating = form.cleaned_data['rating']
                 data.review = form.cleaned_data['review']
+=======
+                data.subject = form.changed_data['subject']
+                data.rating = form.changed_data['rating']
+                data.review = form.changed_data['review']
+>>>>>>> 1eca709f6d9c9b418bb2a7d3b6d6fb41bf2eeaf0
                 data.ip = request.META.get('REMOTE_ADDR') #REMOTE_ADDR will stor the ip address
                 data.product_id = product_id
                 data.user_id = request.user.id

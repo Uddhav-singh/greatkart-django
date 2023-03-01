@@ -2,7 +2,10 @@ from django.db import models
 from category.models import Category
 from django.urls import reverse
 from accounts.models import Account
+<<<<<<< HEAD
 from django.db.models import Avg, Count
+=======
+>>>>>>> 1eca709f6d9c9b418bb2a7d3b6d6fb41bf2eeaf0
 
 # Create your models here.
 class Product(models.Model):
@@ -72,7 +75,11 @@ class ReviewRating(models.Model):
     ip = models.CharField(max_length = 20, blank=True)
     status = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add = True)
+<<<<<<< HEAD
     updated_at = models.DateTimeField(auto_now = True)
+=======
+    product = models.DateTimeField(auto_now = True)
+>>>>>>> 1eca709f6d9c9b418bb2a7d3b6d6fb41bf2eeaf0
 
     def __str__(self):
         return self.subject
